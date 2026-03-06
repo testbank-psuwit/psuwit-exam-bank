@@ -291,6 +291,9 @@
             document.getElementById('display-name').innerText = "คุณ " + response.name;
             document.getElementById('uploaderName').value = response.name;
 	        refreshExamCounts();
+          setTimeout(() => {
+              document.getElementById('dashboard-page').scrollIntoView({ behavior: 'smooth', block: 'start' });
+            }, 200);
           });
         } else {
           Swal.fire({ icon: 'error', title: 'ผิดพลาด', text: response.message });
