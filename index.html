@@ -77,8 +77,8 @@
           <div class="col-6 col-md-3 mb-3">
             <div class="card border-0 bg-light rounded-3 h-100 shadow-sm">
               <div class="card-body">
-                <h6 class="text-muted fw-bold">วิทยาศาสตร์ฯ</h6>
-                <h2 class="text-success fw-bold m-0" id="count-วิทยาศาสตร์">0</h2>
+                <h6 class="text-muted fw-bold">วิทยาศาสตร์และเทคโนโลยี</h6>
+                <h2 class="text-success fw-bold m-0" id="count-วิทยาศาสตร์และเทคโนโลยี">0</h2>
                 <small class="text-muted">ฉบับ</small>
               </div>
             </div>
@@ -128,7 +128,7 @@
             <div class="card border-0 bg-light rounded-3 h-100 shadow-sm">
               <div class="card-body">
                 <h6 class="text-muted fw-bold">การงานอาชีพ</h6>
-                <h2 class="text-dark fw-bold m-0" id="count-การงานอาชีพเเละเทคโนโลยี">0</h2>
+                <h2 class="text-dark fw-bold m-0" id="count-การงานอาชีพ">0</h2>
                 <small class="text-muted">ฉบับ</small>
               </div>
             </div>
@@ -182,16 +182,16 @@
             </div>
 
             <div class="mb-3">
-              <label class="form-label fw-bold">3. วิชา:</label>
+              <label class="form-label fw-bold">3. สาขาวิชา:</label>
               <select id="subject" class="form-select" onchange="updateEduLevels()" required>
-                <option value="">-- เลือกวิชา --</option>
+                <option value="">-- เลือกสาขาวิชา --</option>
                 <option value="คณิตศาสตร์">คณิตศาสตร์</option>
-                <option value="วิทยาศาสตร์">วิทยาศาสตร์</option>
+                <option value="วิทยาศาสตร์และเทคโนโลยี">วิทยาศาสตร์และเทคโนโลยี</option>
 		<option value="สังคมศึกษาศาสนาเเละวัฒนธรรม">สังคมศึกษาศาสนาเเละวัฒนธรรม</option>
 		<option value="สุขศึกษาเเละพลศึกษา">สุขศึกษาเเละพลศึกษา</option>
 		<option value="ภาษาไทย">ภาษาไทย</option>
 		<option value="ภาษาต่างประเทศ">ภาษาต่างประเทศ</option>
-		<option value="การงานอาชีพเเละเทคโนโลยี">การงานอาชีพเเละเทคโนโลยี</option>
+		<option value="การงานอาชีพ">การงานอาชีพ</option>
               </select>
             </div>
 
@@ -444,7 +444,7 @@ const payload = {
 	}
 	}
       },
-      "วิทยาศาสตร์": {
+      "วิทยาศาสตร์และเทคโนโลยี": {
 	"พื้นฐาน":{
         "สาระที่ 1 วิทยาศาสตร์ชีวภาพ": {
           "ว 1.1": ["ม.3/1", "ม.3/2", "ม.3/3", "ม.3/4", "ม.3/5", "ม.3/6", "ม.4/1", "ม.4/2", "ม.4/3", "ม.4/4"],
@@ -559,7 +559,7 @@ const payload = {
           "ต 4.2": ["ม.1/1", "ม.2/1", "ม.2/2", "ม.3/1", "ม.3/2", "ม.4-6/1", "ม.4-6/2"]
         }
       },
-             "การงานอาชีพเเละเทคโนโลยี": {
+             "การงานอาชีพ": {
         "สาระที่ 1 การดำรงชีวิตเเละครอบครัว": {
           "ง 1.1": ["ม.1/1", "ม.1/2", "ม.1/3", "ม.2/1", "ม.2/2", "ม.2/3", "ม.3/1", "ม.3/2", "ม.3/3", "ม.4-6/1", "ม.4-6/2", "ม.4-6/3", "ม.4-6/4", "ม.4-6/5", "ม.4-6/6", "ม.4-6/7"]
         },
@@ -595,7 +595,7 @@ const payload = {
             if (!courseType || !data[courseType]) return null;
             data = data[courseType];
         } 
-        else if (subject === "วิทยาศาสตร์") {
+        else if (subject === "วิทยาศาสตร์และเทคโนโลยี") {
             const courseType = document.getElementById("courseType").value;
             if (!courseType || !data[courseType]) return null;
             data = data[courseType];
@@ -621,7 +621,7 @@ const payload = {
         if (subject === "คณิตศาสตร์") {
             if (eduLevelBox) eduLevelBox.style.display = "block";
             if (courseTypeBox) courseTypeBox.style.display = "block";
-        } else if (subject === "วิทยาศาสตร์") {
+        } else if (subject === "วิทยาศาสตร์และเทคโนโลยี") {
             if (eduLevelBox) eduLevelBox.style.display = "none";
             if (courseTypeBox) courseTypeBox.style.display = "block";
         } else {
