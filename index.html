@@ -34,7 +34,7 @@
         <button type="button" id="btnLogin" class="btn btn-primary w-100 py-2 fs-5" onclick="verifyLogin()">เข้าสู่ระบบ</button>
       </form>
     </div>
-  </div>
+  </div>    
 
   <div id="dashboard-page">
     <div class="header-bg text-center shadow-sm position-relative">
@@ -59,6 +59,51 @@
           </button>
         </div>
       </div>
+<div class="row mb-5">
+        <div class="col-12">
+            <button type="button" class="btn btn-info text-white w-100 py-3 fs-4 fw-bold shadow-sm" onclick="document.getElementById('checkModal').style.display='block'" style="border-radius: 15px;">
+                <i class="bi bi-clock-history"></i> 3. ตรวจสอบประวัติการส่งข้อสอบของฉัน
+            </button>
+        </div>
+    </div>
+
+    <div id="checkModal" style="display:none; position:fixed; z-index:1050; left:0; top:0; width:100%; height:100%; overflow:auto; background-color:rgba(0,0,0,0.5);">
+      <div style="background-color:#fff; margin:10% auto; padding:20px; border-radius:15px; width:90%; max-width:500px; box-shadow: 0 4px 8px rgba(0,0,0,0.2);">
+        <span onclick="document.getElementById('checkModal').style.display='none'" style="color:#aaa; float:right; font-size:28px; font-weight:bold; cursor:pointer;">&times;</span>
+        <h4 style="margin-top:0; color:#4e73df;"><i class="bi bi-search"></i> ตรวจสอบการส่งข้อสอบ</h4>
+        <hr>
+        
+        <label class="fw-bold mb-2">ชื่อผู้ส่ง (ที่ใช้ตอนส่งข้อสอบ):</label>
+        <input type="text" id="checkTeacherName" class="form-control mb-1" placeholder="เช่น ครูสมใจ (พิมพ์ครูนำหน้าทุกครั้ง)">
+        <span style="color: red; font-size: 13px; display: block; margin-bottom: 15px;">
+          * โปรดพิมพ์ชื่อให้ตรงกับชื่อในระบบ (ถ้ามีคำว่า "ครู" นำหน้า ให้พิมพ์ด้วยครับ)
+        </span>
+        
+        <div class="row">
+            <div class="col-6">
+                <label class="fw-bold mb-2">ปีการศึกษา:</label>
+                <select id="checkYear" class="form-select mb-3">
+                  <option value="2567">2567</option>
+                  <option value="2568">2568</option>
+                  <option value="2569">2569</option>
+                </select>
+            </div>
+            <div class="col-6">
+                <label class="fw-bold mb-2">เทอม:</label>
+                <select id="checkTerm" class="form-select mb-3">
+                  <option value="1">1</option>
+                  <option value="2">2</option>
+                </select>
+            </div>
+        </div>
+
+        <button onclick="checkMySubmissions()" class="btn btn-primary w-100 py-2 fs-5 fw-bold" style="border-radius: 10px;">
+          ค้นหาข้อมูล
+        </button>
+
+        <div id="checkResult" class="mt-4" style="max-height: 300px; overflow-y: auto;"></div>
+      </div>
+    </div>
 
       <div class="bg-white p-4 rounded-4 shadow-sm">
         <h4 class="fw-bold text-secondary mb-4"><i class="bi bi-bar-chart-fill"></i> สรุปจำนวนข้อสอบในคลัง</h4>
@@ -241,11 +286,6 @@
                 <option value="3">3</option>
                 <option value="4">4</option>
                 <option value="5">5</option>
-                <option value="6">6</option>
-                <option value="7">7</option>
-                <option value="8">8</option>
-                <option value="9">9</option>
-                <option value="10">10</option>
               </select>
             </div>
 
@@ -467,6 +507,10 @@ const payload = {
 	"สาระที่ 3 วิทยาศาสตร์โลก และอวกาศ": {
           "ว 3.1": ["ม.3/1", "ม.3/2", "ม.3/3", "ม.3/4", "ม.6/1", "ม.6/2", "ม.6/3", "ม.6/4", "ม.6/5", "ม.6/6", "ม.6/7", "ม.6/8", "ม.6/9", "ม.6/10"],
 	  "ว 3.2": ["ม.1/1", "ม.1/2", "ม.1/3", "ม.1/4", "ม.1/5", "ม.1/6", "ม.1/7", "ม.2/1", "ม.2/2", "ม.2/3", "ม.2/4", "ม.2/5", "ม.2/6", "ม.2/7", "ม.2/8", "ม.2/9", "ม.2/10", "ม.6/1", "ม.6/2", "ม.6/3", "ม.6/4", "ม.6/5", "ม.6/6", "ม.6/7", 		"ม.6/8", "ม.6/9", "ม.6/10", "ม.6/11", "ม.6/12", "ม.6/13", "ม.6/14"]
+        },
+  "สาระที่ 4 เทคโนโลยี": {
+          "ว 4.1": ["ม.1/1", "ม.1/2", "ม.1/3", "ม.1/4", "ม.1/5","ม.2/1", "ม.2/2", "ม.2/3", "ม.2/4", "ม.2/5", "ม.3/1", "ม.3/2", "ม.3/3", "ม.3/4", "ม.3/5", "ม.4/1", "ม.4/2", "ม.4/3", "ม.4/4", "ม.4/5", "ม.5/1"],
+	  "ว 4.2": ["ม.1/1", "ม.1/2", "ม.1/3", "ม.1/4", "ม.2/1", "ม.2/2", "ม.2/3", "ม.2/4", "ม.3/1", "ม.3/2", "ม.3/3", "ม.3/4", "ม.4/1", "ม.5/1", "ม.6/1"]
         }
 	},
 	"เพิ่มเติม":{
@@ -754,6 +798,63 @@ const payload = {
       })
       .catch(err => console.error("โหลดข้อมูลสถิติไม่สำเร็จ:", err));
     }
+    // 👇👇👇 เริ่มส่วนที่ 3: ฟังก์ชันค้นหาข้อมูล 👇👇👇
+function checkMySubmissions() {
+  const teacherName = document.getElementById("checkTeacherName").value.trim();
+  const year = document.getElementById("checkYear").value;
+  const term = document.getElementById("checkTerm").value;
+  const resultDiv = document.getElementById("checkResult");
+
+  if (!teacherName) {
+    alert("กรุณากรอกชื่อผู้ส่งก่อนกดค้นหาครับ");
+    return;
+  }
+
+  resultDiv.innerHTML = "<p style='color:blue; text-align:center;'>กำลังค้นหาข้อมูล... ⏳</p>";
+
+  const payload = {
+    action: "checkSubmission",
+    teacherId: teacherName, 
+    year: year,
+    term: term
+  };
+
+  fetch(API_URL, {
+    method: 'POST',
+    body: JSON.stringify(payload)
+  })
+  .then(res => res.json())
+  .then(data => {
+    if (data.success) {
+      if (data.data.length === 0) {
+        resultDiv.innerHTML = `<p style='color:red; text-align:center;'>❌ ไม่พบประวัติการส่งข้อสอบของ <b>${teacherName}</b> ในเทอม ${term}/${year}</p>`;
+      } else {
+        let html = `<p style='color:green; text-align:center;'>✅ ส่งสำเร็จแล้วทั้งหมด <b>${data.data.length}</b> ข้อ</p>`;
+        html += `<table border="1" style="width:100%; border-collapse: collapse; font-size: 14px;">
+                  <tr style="background-color: #f2f2f2; text-align: center;">
+                    <th style="padding: 8px; width: 20%;">ข้อที่</th>
+                    <th style="padding: 8px; width: 40%;">วิชา</th>
+                    <th style="padding: 8px; width: 40%;">ตัวชี้วัด</th>
+                  </tr>`;
+        data.data.forEach(item => {
+          html += `<tr>
+                    <td style="padding: 8px; text-align: center;"><b>${item.questionNo}</b></td>
+                    <td style="padding: 8px;">${item.subject}</td>
+                    <td style="padding: 8px;">${item.indicator}</td>
+                   </tr>`;
+        });
+        html += `</table>`;
+        resultDiv.innerHTML = html;
+      }
+    } else {
+      resultDiv.innerHTML = `<p style='color:red;'>เกิดข้อผิดพลาด: ${data.message}</p>`;
+    }
+  })
+  .catch(err => {
+    resultDiv.innerHTML = `<p style='color:red;'>การเชื่อมต่อขัดข้อง: ${err}</p>`;
+  });
+}
+// 👆👆👆 สิ้นสุดส่วนที่ 3 👆👆👆
   </script>
 </body>
 </html>
