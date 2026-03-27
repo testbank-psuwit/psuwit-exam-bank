@@ -558,7 +558,7 @@ const payload = {
 	  "ส 4.3": ["ม.1/1", "ม.1/2", "ม.1/3", "ม.2/1", "ม.2/2", "ม.2/3", "ม.3/1", "ม.3/2", "ม.3/3", "ม.3/4", "ม.4-6/1", "ม.4-6/2", "ม.4-6/3", "ม.4-6/4", "ม.4-6/5"]
         },
 	"สาระที่ 5  ภูมิศาสตร์": {
-          "ส 5.1": ["ม.1/1", "ม.1/2", "ม.1/3", "ม.2/1", "ม.2/2", "ม.3/1", "ม.3/2", "ม.4-6/1", "ม.4-6/2", "ม.4-6/3", "ม.4-6/4"],
+          "ส 5.1": ["ม.1/1", "ม.1/2", "ม.1/3", "ม.2/1", "ม.2/2", "ม.2/3", "ม.3/1", "ม.3/2", "ม.4-6/1", "ม.4-6/2", "ม.4-6/3", "ม.4-6/4"],
           "ส 5.2": ["ม.1/1", "ม.1/2", "ม.1/3", "ม.1/4", "ม.2/1", "ม.2/2", "ม.2/3", "ม.2/4", "ม.3/1", "ม.3/2", "ม.3/3", "ม.3/4", "ม.4-6/1", "ม.4-6/2", "ม.4-6/3", "ม.4-6/4", "ม.4-6/5"]
         }
       },
@@ -837,14 +837,16 @@ function checkMySubmissions() {
         let html = `<p style='color:green; text-align:center;'>✅ ส่งสำเร็จแล้วทั้งหมด <b>${data.data.length}</b> ข้อ</p>`;
         html += `<table border="1" style="width:100%; border-collapse: collapse; font-size: 14px;">
                   <tr style="background-color: #f2f2f2; text-align: center;">
-                    <th style="padding: 8px; width: 20%;">ข้อที่</th>
-                    <th style="padding: 8px; width: 40%;">วิชา</th>
-                    <th style="padding: 8px; width: 40%;">ตัวชี้วัด</th>
+                    <th style="padding: 8px; width: 15%;">ข้อที่</th>
+                    <th style="padding: 8px; width: 30%;">วิชา</th>
+                    <th style="padding: 8px; width: 25%;">มาตรฐาน</th>
+                    <th style="padding: 8px; width: 30%;">ตัวชี้วัด</th>
                   </tr>`;
         data.data.forEach(item => {
           html += `<tr>
                     <td style="padding: 8px; text-align: center;"><b>${item.questionNo}</b></td>
                     <td style="padding: 8px;">${item.subject}</td>
+                    <td style="padding: 8px;">${item.standard}</td>
                     <td style="padding: 8px;">${item.indicator}</td>
                    </tr>`;
         });
