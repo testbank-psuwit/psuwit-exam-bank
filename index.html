@@ -60,50 +60,83 @@
         </div>
       </div>
 <div class="row mb-5">
-        <div class="col-12">
-            <button type="button" class="btn btn-info text-white w-100 py-3 fs-4 fw-bold shadow-sm" onclick="document.getElementById('checkModal').style.display='block'" style="border-radius: 15px;">
-                <i class="bi bi-clock-history"></i> 3. ตรวจสอบประวัติการส่งข้อสอบของฉัน
-            </button>
+    <div class="col-12">
+        <button type="button" id="toggleCheckBtn" class="btn btn-info text-white w-100 py-3 fs-4 fw-bold shadow-sm" onclick="toggleCheckSection()" style="border-radius: 15px; transition: 0.3s;">
+            <i class="bi bi-clock-history"></i> 3. ตรวจสอบประวัติการส่งข้อสอบ
+        </button>
+    </div>
+</div>
+
+<div id="checkSectionContainer" style="display: none; padding: 20px; border: 2px dashed #17a2b8; border-radius: 15px; background-color: #f8fdfd; margin-bottom: 30px;">
+  
+  <div style="border: 1px solid #ccc; padding: 20px; background-color: white; border-radius: 10px; margin-bottom: 20px; box-shadow: 0 2px 4px rgba(0,0,0,0.05);">
+    <h4 style="margin-top: 0; color: #4e73df;"><i class="bi bi-person-badge"></i> 1. ตรวจสอบรายบุคคล</h4>
+    <hr>
+    <label class="fw-bold mb-2">ชื่อผู้ส่ง (ที่ใช้ตอนส่งข้อสอบ):</label>
+    <input type="text" id="checkTeacherName" class="form-control mb-1" placeholder="เช่น ครูสมใจ (พิมพ์ครูนำหน้าทุกครั้ง)">
+    <span style="color: red; font-size: 13px; display: block; margin-bottom: 15px;">
+      * โปรดพิมพ์ชื่อให้ตรงกับชื่อในระบบ (ถ้ามีคำว่า "ครู" นำหน้า ให้พิมพ์ด้วยครับ)
+    </span>
+    
+    <div class="row">
+        <div class="col-6">
+            <label class="fw-bold mb-2">ปีการศึกษา:</label>
+            <select id="checkYear" class="form-select mb-3">
+              <option value="2567">2567</option>
+              <option value="2568" selected>2568</option>
+              <option value="2569">2569</option>
+            </select>
+        </div>
+        <div class="col-6">
+            <label class="fw-bold mb-2">เทอม:</label>
+            <select id="checkTerm" class="form-select mb-3">
+              <option value="1">1</option>
+              <option value="2" selected>2</option>
+            </select>
         </div>
     </div>
+    <button onclick="checkMySubmissions()" class="btn btn-primary w-100 py-2 fs-5 fw-bold" style="border-radius: 10px;">
+      🔍 ค้นหารายบุคคล
+    </button>
+    <div id="checkResult" class="mt-3" style="max-height: 300px; overflow-y: auto;"></div>
+  </div>
 
-    <div id="checkModal" style="display:none; position:fixed; z-index:1050; left:0; top:0; width:100%; height:100%; overflow:auto; background-color:rgba(0,0,0,0.5);">
-      <div style="background-color:#fff; margin:10% auto; padding:20px; border-radius:15px; width:90%; max-width:500px; box-shadow: 0 4px 8px rgba(0,0,0,0.2);">
-        <span onclick="document.getElementById('checkModal').style.display='none'" style="color:#aaa; float:right; font-size:28px; font-weight:bold; cursor:pointer;">&times;</span>
-        <h4 style="margin-top:0; color:#4e73df;"><i class="bi bi-search"></i> ตรวจสอบการส่งข้อสอบ</h4>
-        <hr>
-        
-        <label class="fw-bold mb-2">ชื่อผู้ส่ง (ที่ใช้ตอนส่งข้อสอบ):</label>
-        <input type="text" id="checkTeacherName" class="form-control mb-1" placeholder="เช่น ครูสมใจ (พิมพ์ครูนำหน้าทุกครั้ง)">
-        <span style="color: red; font-size: 13px; display: block; margin-bottom: 15px;">
-          * โปรดพิมพ์ชื่อให้ตรงกับชื่อในระบบ (ถ้ามีคำว่า "ครู" นำหน้า ให้พิมพ์ด้วยครับ)
-        </span>
-        
-        <div class="row">
-            <div class="col-6">
-                <label class="fw-bold mb-2">ปีการศึกษา:</label>
-                <select id="checkYear" class="form-select mb-3">
-                  <option value="2567">2567</option>
-                  <option value="2568">2568</option>
-                  <option value="2569">2569</option>
-                </select>
-            </div>
-            <div class="col-6">
-                <label class="fw-bold mb-2">เทอม:</label>
-                <select id="checkTerm" class="form-select mb-3">
-                  <option value="1">1</option>
-                  <option value="2">2</option>
-                </select>
-            </div>
-        </div>
-
-        <button onclick="checkMySubmissions()" class="btn btn-primary w-100 py-2 fs-5 fw-bold" style="border-radius: 10px;">
-          ค้นหาข้อมูล
-        </button>
-
-        <div id="checkResult" class="mt-4" style="max-height: 300px; overflow-y: auto;"></div>
+  <div style="border: 1px solid #17a2b8; padding: 20px; border-radius: 10px; background-color: white; box-shadow: 0 2px 4px rgba(0,0,0,0.05);">
+    <h4 style="margin-top: 0; color: #0c5460;"><i class="bi bi-bar-chart-fill"></i> 2. ตรวจสอบสถิติ (รายกลุ่มสาระ)</h4>
+    <hr>
+    <div class="row">
+      <div class="col-12 mb-3">
+        <label class="fw-bold mb-2">กลุ่มสาระการเรียนรู้:</label>
+        <select id="checkDept" class="form-select">
+          <option value="">-- เลือกกลุ่มสาระ --</option>
+          <option value="คณิตศาสตร์">คณิตศาสตร์</option>
+          <option value="วิทยาศาสตร์และเทคโนโลยี">วิทยาศาสตร์และเทคโนโลยี</option>
+          <option value="สังคมศึกษา ศาสนาและวัฒนธรรม">สังคมศึกษา ศาสนาและวัฒนธรรม</option>
+          <option value="สุขศึกษาเเละพลศึกษา">สุขศึกษาเเละพลศึกษา</option>
+          <option value="ภาษาไทย">ภาษาไทย</option>
+          <option value="ภาษาต่างประเทศ">ภาษาต่างประเทศ</option>
+          <option value="การงานอาชีพ">การงานอาชีพ</option>
+        </select>
+      </div>
+      <div class="col-6 mb-3">
+        <label class="fw-bold mb-2">ปีการศึกษา:</label>
+        <input type="number" id="checkDeptYear" value="2568" class="form-control">
+      </div>
+      <div class="col-6 mb-3">
+        <label class="fw-bold mb-2">เทอม:</label>
+        <select id="checkDeptTerm" class="form-select">
+          <option value="1">1</option>
+          <option selected value="2">2</option>
+        </select>
       </div>
     </div>
+    <button onclick="checkDepartmentSubmissions()" class="btn btn-info text-white w-100 py-2 fs-5 fw-bold" style="border-radius: 10px;">
+      📊 ค้นหากลุ่มสาระ
+    </button>
+    <div id="checkDeptResult" class="mt-3" style="min-height: 50px;"></div>
+  </div>
+
+</div>
 
       <div class="bg-white p-4 rounded-4 shadow-sm">
         <h4 class="fw-bold text-secondary mb-4"><i class="bi bi-bar-chart-fill"></i> สรุปจำนวนข้อสอบในคลัง</h4>
@@ -286,21 +319,21 @@
                 <option value="3">3</option>
                 <option value="4">4</option>
                 <option value="5">5</option>
-                <option value="5">6</option>
-                <option value="5">7</option>
-                <option value="5">8</option>
-                <option value="5">9</option>
-                <option value="5">10</option>
-                <option value="5">11</option>
-                <option value="5">12</option>
-                <option value="5">13</option>
-                <option value="5">14</option>
-                <option value="5">15</option>
-                <option value="5">16</option>
-                <option value="5">17</option>
-                <option value="5">18</option>
-                <option value="5">19</option>
-                <option value="5">20</option>
+                <option value="6">6</option>
+                <option value="7">7</option>
+                <option value="8">8</option>
+                <option value="9">9</option>
+                <option value="10">10</option>
+                <option value="11">11</option>
+                <option value="12">12</option>
+                <option value="13">13</option>
+                <option value="14">14</option>
+                <option value="15">15</option>
+                <option value="16">16</option>
+                <option value="17">17</option>
+                <option value="18">18</option>
+                <option value="19">19</option>
+                <option value="20">20</option>
               </select>
             </div>
 
@@ -875,6 +908,100 @@ function checkMySubmissions() {
   });
 }
 // 👆👆👆 สิ้นสุดส่วนที่ 3 👆👆👆
+// ฟังก์ชันตรวจสอบยอดส่งของกลุ่มสาระ
+function checkDepartmentSubmissions() {
+  const department = document.getElementById("checkDept").value;
+  const year = document.getElementById("checkDeptYear").value;
+  const term = document.getElementById("checkDeptTerm").value;
+  const resultDiv = document.getElementById("checkDeptResult");
+
+  if (!department) {
+    alert("กรุณาเลือกกลุ่มสาระการเรียนรู้ก่อนกดค้นหาครับ");
+    return;
+  }
+
+  resultDiv.innerHTML = "<p style='color:#17a2b8; text-align:center;'>กำลังรวบรวมสถิติกลุ่มสาระ... ⏳</p>";
+
+  const payload = {
+    action: "checkDepartmentSubmission", 
+    department: department, 
+    year: year,
+    term: term
+  };
+
+  fetch(API_URL, {
+    method: 'POST',
+    body: JSON.stringify(payload)
+  })
+  .then(res => res.json())
+  .then(data => {
+    if (data.success) {
+      const teacherStats = data.data; 
+      const teacherNames = Object.keys(teacherStats);
+
+      if (teacherNames.length === 0) {
+        resultDiv.innerHTML = `<p style='color:#dc3545; text-align:center; margin:0;'>❌ ยังไม่มีการส่งข้อสอบในกลุ่มสาระ <b>${department}</b> (เทอม ${term}/${year})</p>`;
+      } else {
+        let totalQuestions = 0;
+        let html = `<p style='color:#28a745; text-align:center; margin-top:0;'>✅ ข้อมูลกลุ่มสาระ <b>${department}</b> (เทอม ${term}/${year})</p>`;
+        
+        html += `<table border="1" style="width:100%; border-collapse: collapse; font-size: 14px; border-color: #dee2e6;">
+                  <tr style="background-color: #17a2b8; color: white; text-align: center;">
+                    <th style="padding: 10px; width: 10%;">ลำดับ</th>
+                    <th style="padding: 10px; width: 60%;">ชื่อคุณครูผู้ส่ง</th>
+                    <th style="padding: 10px; width: 30%;">จำนวนที่ส่งแล้ว (ข้อ)</th>
+                  </tr>`;
+        
+        // จัดเรียงชื่อครูตามลำดับตัวอักษรเพื่อความสวยงาม
+        teacherNames.sort();
+        
+        teacherNames.forEach((name, index) => {
+          const count = teacherStats[name];
+          totalQuestions += count;
+          html += `<tr style="background-color: ${index % 2 === 0 ? '#ffffff' : '#f9f9f9'};">
+                    <td style="padding: 8px; text-align: center;">${index + 1}</td>
+                    <td style="padding: 8px;">${name}</td>
+                    <td style="padding: 8px; text-align: center; color: #0056b3;"><b>${count}</b></td>
+                   </tr>`;
+        });
+        
+        html += `<tr style="background-color: #cff4fc;">
+                  <td colspan="2" style="padding: 10px; text-align: right; font-size: 16px;"><b>รวมทั้งหมดในกลุ่มสาระนี้:</b></td>
+                  <td style="padding: 10px; text-align: center; color: #0c5460; font-size: 16px;"><b>${totalQuestions}</b></td>
+                 </tr>`;
+        html += `</table>`;
+        
+        resultDiv.innerHTML = html;
+      }
+    } else {
+      resultDiv.innerHTML = `<p style='color:red;'>เกิดข้อผิดพลาด: ${data.message}</p>`;
+    }
+  })
+  .catch(err => {
+    resultDiv.innerHTML = `<p style='color:red;'>การเชื่อมต่อขัดข้อง: ${err}</p>`;
+  });
+}
+// =========================================================
+// ฟังก์ชันสำหรับสลับการซ่อน/แสดง กล่องตรวจสอบ
+// =========================================================
+function toggleCheckSection() {
+  const container = document.getElementById("checkSectionContainer");
+  const btn = document.getElementById("toggleCheckBtn");
+
+  if (container.style.display === "none") {
+    // ถ้าซ่อนอยู่ ให้เปิด และเปลี่ยนปุ่มเป็นสีแดง (btn-danger)
+    container.style.display = "block";
+    btn.innerHTML = '<i class="bi bi-x-circle"></i> ปิดหน้าต่างตรวจสอบ';
+    btn.classList.remove("btn-info");
+    btn.classList.add("btn-danger"); 
+  } else {
+    // ถ้าแสดงอยู่ ให้ซ่อน และเปลี่ยนปุ่มกลับเป็นสีฟ้า (btn-info)
+    container.style.display = "none";
+    btn.innerHTML = '<i class="bi bi-clock-history"></i> 3. ตรวจสอบประวัติการส่งข้อสอบ';
+    btn.classList.remove("btn-danger");
+    btn.classList.add("btn-info"); 
+  }
+}
   </script>
 </body>
 </html>
